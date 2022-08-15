@@ -7,7 +7,7 @@ from social_net.celery import app
 
 @app.task
 def send_post_info(name):
-    text = f'Hello world {name}!'
+    # text = f'Hello world {name}!'
     html_message1 = render_to_string('send_mail.html', {'name': name})
 
     for user in Post.objects.all():

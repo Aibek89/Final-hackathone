@@ -1,10 +1,11 @@
 from django.contrib import admin
 
-from post.models import Post, Like, Image
-
+from post.models import Post, Like, Image, Favorite, Contact
 
 admin.site.register(Like)
 admin.site.register(Image)
+admin.site.register(Favorite)
+admin.site.register(Contact)
 
 
 class ImageInAdmin(admin.TabularInline):

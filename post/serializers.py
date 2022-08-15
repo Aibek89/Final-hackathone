@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
-from post.models import Post, Comment, Image
-
+from post.models import Post, Comment, Image, Contact
+from post.tasks import send_post_info
 
 class CommentSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.email')
@@ -37,9 +37,16 @@ class PostSerializer(serializers.ModelSerializer):
 
         for image in images.getlist('images'):
             Image.objects.create(post=post, image=image)
+
+        # send_post_info.delay(validated_data['name'])
         return post
 
 
+class ContactSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Contact
+        fields = '__all__'
 
 
 

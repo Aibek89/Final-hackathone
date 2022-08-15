@@ -35,3 +35,19 @@ class Comment(models.Model):
 class Image(models.Model):
     image = models.ImageField(upload_to='posts')
     post = models.ForeignKey(Post, on_delete=CASCADE, related_name='images')
+
+
+class Favorite(models.Model):
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='favorites')
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='favorites')
+    favorite = models.BooleanField('favorite', default=False)
+
+    def __str__(self):
+        return f'{self.owner} {self.post}'
+
+
+class Contact(models.Model):
+    email = models.EmailField(unique=True)
+
+    def __str__(self):
+        return self.email
